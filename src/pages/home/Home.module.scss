@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.corpo{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.titulo{
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  font-size: 5em;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+}
+.form{
+  display: flex;
+  background-color: #f0f0f0;
+}
+.icon{
+  width: 28px;
+  height: 28px;
+  margin: 3px;
+  cursor: pointer;
+  &:hover{
+    color: #1976d2;
+  }
+}
+.estado{
+  width: 91px;
+}
+.pesquisa{
+  border-radius: 0px;
+}
