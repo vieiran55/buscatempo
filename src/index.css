@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+body {
+  background: rgb(255,130,0);
+  background: linear-gradient(163deg, rgba(255,130,0,1) 0%, rgba(255,184,0,1) 50%);
+  height: 130vh;  
+}
+*{
+  box-sizing: border-box;
+  font-family: 'Italiana', serif;
+}

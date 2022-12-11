@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import 'styles/variaveis';
+@import "styles/breakpoints";
+
+.corpo{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  @media (min-width: $mobile) {
+
+  }
+  @media (min-width: $desktop_md) {
+
+  }
+}
+
+.titulo{
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  @media (min-width: $mobile) {
+    font-size: 2.5em;
+  }
+  @media (min-width: $desktop_md) {
+    font-size: 5em;
+  }
+}
+
+.container{
+  display: flex;
+  align-items: center;
+}
+.form{
+  display: flex;
+  background-color: #f0f0f0;
+  @media (min-width: $mobile) {
+    width: 23em;
+  }
+  @media (min-width: $desktop_md) {
+    width: 40em;
+  }
+}
+.icon{
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  &:hover{
+    color: #1976d2;
+  }
+}
+.estado{
+  @media (min-width: $mobile) {
+    width: 90px;
+  }
+  @media (min-width: $desktop_md) {
+    width: 91px;
+  }
+}
+.pesquisa{
+  border-radius: 0px;
+}
+
+.divisa{
+  background-color: $white-ice;
+  width: 100%;
+  height: 100%;
+  @media (min-width: $mobile) {
+    width: 100%;
+    height: 100%;
+    margin: 3em;
+    padding: 1px;
+  }
+  @media (min-width: $desktop_md) {
+    width: 40em;
+  }
+}
+
+.capitais{
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  color: $white-ice;
+  &__titulos{
+    font-family: 'Montserrat', sans-serif;
+    color: $dark;
+  }
+}
