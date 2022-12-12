@@ -5,6 +5,8 @@ import IDados from "interfaces/IDadosSemana";
 import Item from "components/Itens";
 import IDadosSemana from "interfaces/IDadosSemana";
 import Itens from "components/Itens";
+import estilos from "./Previsao.module.scss";
+import { GrFormClose } from "react-icons/gr";
 
 interface Opcoes {
   city: string;
@@ -32,7 +34,15 @@ function Previsao(props: Props) {
   const [cidades, setCidades] = useState<IDadosSemana[]>([]);
   const [repositorio, setRepositorio] = useState<Opcoes[]>([]);
 
+  const [isShown, setIsShown] = useState(true);
+  const handleClick = () => {
+    // 👇️ toggle shown state
+    setIsShown(false);
+  };
+
   const valores = Object.values(repositorio);
+
+  const fiveDays = cidades.slice(0, 5);
 
   const valoresString = valores.map(function (item, indice) {
     return item.toString();
@@ -47,18 +57,19 @@ function Previsao(props: Props) {
   const humidade = valoresString[9];
   const vento = valoresString[12];
 
-  // useEffect(() => {
-  //   // obter restaurantes
-  //   http.get(`${inputCidade},${inputEstado}`)
-  //     .then(resposta => {
-  //       setRepositorio(resposta.data.results);
-  //       setCidades(resposta.data.results.forecast);
-  //       console.log(cidades);
-  //     })
-  //     .catch(erro => {
-  //       console.log(erro);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // obter cidade
+    http
+      .get(`${inputCidade},${inputEstado}`)
+      .then((resposta) => {
+        setRepositorio(resposta.data.results);
+        setCidades(resposta.data.results.forecast);
+        console.log(cidades);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }, []);
 
   // useEffect(() => {
   //   // obter restaurantes
@@ -88,26 +99,30 @@ function Previsao(props: Props) {
   return (
     <>
       <div>
-        <div>
-          <h1>{nomeCidade}</h1>
-          <p>{temp}ºC</p>
-          <p>{clima}</p>
-          <p>{sensacao}º</p>
-          <p>{humidade}%</p>
-          <p>Vento {vento}</p>
+        <div className={estilos.previsao}>
+          <div className={estilos.headerConteiner}>
+            <h1 className={estilos.cidade}>{nomeCidade}</h1>
+            <GrFormClose className={estilos.close} onClick={handleClick} />
+          </div>
+          <div className={estilos.cabecalho}>
+            <p className={estilos.cabecalho__temp}>{temp}ºC</p>
+            <p className={estilos.cabecalho__clima}>{clima}</p>
+          </div>
+          <div className={estilos.dados}>
+            <p className={estilos.dados__humidade}>
+              Humidade <b>{humidade}%</b>
+            </p>
+            <p className={estilos.dados__vento}>
+              Vento <b>{vento}</b>
+            </p>
+          </div>
+          <div className={estilos.divisa}></div>
+          <div className={estilos.item}>
+            {fiveDays.map((item, index) => (
+              <Itens key={index} {...item} />
+            ))}
+          </div>
         </div>
-        <div>
-          {cidades.map((item, index) => (
-            <Itens key={index} {...item} />
-          ))}
-        </div>
-        <button
-          onClick={() =>
-            console.log(`cidade: ${inputCidade}, estado: ${inputEstado}`)
-          }
-        >
-          teste
-        </button>
       </div>
     </>
   );
