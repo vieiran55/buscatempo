@@ -5,7 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import estilos from "./Home.module.scss";
 import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Previsao from "pages/Previsao";
 import IDadosSemana from "interfaces/IDadosSemana";
-
 
 interface Opcoes {
   city: string;
@@ -42,15 +41,19 @@ interface Opcoes {
 interface Props {
   inputCidade: string;
   inputEstado: string;
+  isShown: boolean;
   setCidade: React.Dispatch<React.SetStateAction<string>>;
   setEstado: React.Dispatch<React.SetStateAction<string>>;
+  setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Home({
   inputCidade,
   inputEstado,
+  isShown,
   setCidade,
   setEstado,
+  setIsShown,
 }: Props) {
   const [repositorio, setRepositorio] = useState<Opcoes[]>([]);
   const [cidades, setCidades] = useState<IDadosSemana[]>([]);
@@ -130,92 +133,93 @@ export default function Home({
     createData(`${tempBeloHorizonte}º`, nomeBeloHorizonte, climaBeloHorizonte),
   ];
 
-  useEffect(() => {
-    // obter restaurantes
-    http
-      .get("Brasilia,DF")
-      .then((resposta) => {
-        setBrasilia(resposta.data.results);
-        console.log(brasilia);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // obter restaurantes
+  //   http
+  //     .get("Brasilia,DF")
+  //     .then((resposta) => {
+  //       setBrasilia(resposta.data.results);
+  //       console.log(brasilia);
+  //     })
+  //     .catch((erro) => {
+  //       console.log(erro);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    // obter restaurantes
-    http
-      .get("Sao Paulo,SP")
-      .then((resposta) => {
-        setSaopaulo(resposta.data.results);
-        console.log(saopaulo);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // obter restaurantes
+  //   http
+  //     .get("Sao Paulo,SP")
+  //     .then((resposta) => {
+  //       setSaopaulo(resposta.data.results);
+  //       console.log(saopaulo);
+  //     })
+  //     .catch((erro) => {
+  //       console.log(erro);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    // obter restaurantes
-    http
-      .get("Rio de Janeiro,RJ")
-      .then((resposta) => {
-        setRio(resposta.data.results);
-        console.log(rio);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // obter restaurantes
+  //   http
+  //     .get("Rio de Janeiro,RJ")
+  //     .then((resposta) => {
+  //       setRio(resposta.data.results);
+  //       console.log(rio);
+  //     })
+  //     .catch((erro) => {
+  //       console.log(erro);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    // obter restaurantes
-    http
-      .get("Salvador,BA")
-      .then((resposta) => {
-        setSalvador(resposta.data.results);
-        console.log(salvador);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // obter restaurantes
+  //   http
+  //     .get("Salvador,BA")
+  //     .then((resposta) => {
+  //       setSalvador(resposta.data.results);
+  //       console.log(salvador);
+  //     })
+  //     .catch((erro) => {
+  //       console.log(erro);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    // obter restaurantes
-    http
-      .get("Belo Horizonte,MG")
-      .then((resposta) => {
-        setBeloHorizonte(resposta.data.results);
-        console.log(beloHorizonte);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // obter restaurantes
+  //   http
+  //     .get("Belo Horizonte,MG")
+  //     .then((resposta) => {
+  //       setBeloHorizonte(resposta.data.results);
+  //       console.log(beloHorizonte);
+  //     })
+  //     .catch((erro) => {
+  //       console.log(erro);
+  //     });
+  // }, []);
 
-  const [isShown, setIsShown] = useState(false);
-
-  const handleClick = () => {
-    // 👇️ toggle shown state
-    // setIsShown((current) => !current);
-
-    if (isShown === true) {
-      setCidade("");
-      setEstado("");
-      setIsShown(false);
-    } else {
-      setIsShown(true);
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setCidade(e.target.value);
   };
+  
+  const handleClick = () => {
+    setIsShown(true);
+  };
+
 
   return (
     <>
       <div className={estilos.corpo}>
         <h1 className={estilos.titulo}>Previsão do Tempo</h1>
         {isShown && (
-          <Previsao inputEstado={inputEstado} inputCidade={inputCidade} />
+          <Previsao
+            inputEstado={inputEstado}
+            inputCidade={inputCidade}
+            isShown={isShown}
+            setCidade={setCidade}
+            setEstado={setEstado}
+            setIsShown={setIsShown}
+          />
         )}
         <div className={estilos.container}>
           <Box
@@ -249,7 +253,7 @@ export default function Home({
                   </InputAdornment>
                 ),
               }}
-              onChange={(e) => setCidade(e.target.value)}
+              onChange={(e) => handleChange(e)}
             />
             <div className={estilos.estado}>
               <FormControl variant="filled" sx={{ m: 0, minWidth: 90 }}>
@@ -305,8 +309,7 @@ export default function Home({
               size="small"
               aria-label="a dense table"
             >
-              <TableHead >
-
+              <TableHead>
                 <TableRow>
                   <TableCell>Temp</TableCell>
                   <TableCell align="center">Cidade</TableCell>

@@ -6,7 +6,8 @@ import Item from "components/Itens";
 import IDadosSemana from "interfaces/IDadosSemana";
 import Itens from "components/Itens";
 import estilos from "./Previsao.module.scss";
-import { GrFormClose } from "react-icons/gr";
+import { CgClose } from "react-icons/cg";
+import { IconContext } from "react-icons";
 
 interface Opcoes {
   city: string;
@@ -26,16 +27,21 @@ interface Opcoes {
 interface Props {
   inputCidade: string;
   inputEstado: string;
+  isShown: boolean
+  setCidade: React.Dispatch<React.SetStateAction<string>>;
+  setEstado: React.Dispatch<React.SetStateAction<string>>;
+  setIsShown:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Previsao(props: Props) {
-  const { inputCidade, inputEstado } = props;
+  const { inputCidade, inputEstado, isShown, setCidade, setEstado, setIsShown} = props;
 
   const [cidades, setCidades] = useState<IDadosSemana[]>([]);
   const [repositorio, setRepositorio] = useState<Opcoes[]>([]);
 
-  const [isShown, setIsShown] = useState(true);
   const handleClick = () => {
+    setCidade("");
+    setEstado("");
     // 👇️ toggle shown state
     setIsShown(false);
   };
@@ -60,7 +66,7 @@ function Previsao(props: Props) {
   useEffect(() => {
     // obter cidade
     http
-      .get(`${inputCidade},${inputEstado}`)
+      .get(`https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`)
       .then((resposta) => {
         setRepositorio(resposta.data.results);
         setCidades(resposta.data.results.forecast);
@@ -102,7 +108,7 @@ function Previsao(props: Props) {
         <div className={estilos.previsao}>
           <div className={estilos.headerConteiner}>
             <h1 className={estilos.cidade}>{nomeCidade}</h1>
-            <GrFormClose className={estilos.close} onClick={handleClick} />
+            <CgClose  className={estilos.close} onClick={handleClick} />
           </div>
           <div className={estilos.cabecalho}>
             <p className={estilos.cabecalho__temp}>{temp}ºC</p>
