@@ -137,7 +137,7 @@ export default function Home({
     // obter restaurantes
     http
       .get(
-        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+        "https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=Brasilia,DF"
       )
       .then((resposta) => {
         setBrasilia(resposta.data.results);
@@ -152,7 +152,7 @@ export default function Home({
     // obter restaurantes
     http
       .get(
-        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+        "https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=Sao Paulo,SP"
       )
       .then((resposta) => {
         setSaopaulo(resposta.data.results);
@@ -167,7 +167,7 @@ export default function Home({
     // obter restaurantes
     http
       .get(
-        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+        "https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=Rio de Janeiro,RJ"
       )
       .then((resposta) => {
         setRio(resposta.data.results);
@@ -182,7 +182,7 @@ export default function Home({
     // obter restaurantes
     http
       .get(
-        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+        "https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=Salvador,BA"
       )
       .then((resposta) => {
         setSalvador(resposta.data.results);
@@ -197,7 +197,7 @@ export default function Home({
     // obter restaurantes
     http
       .get(
-        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+        "https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=Belo Horizonte,MG"
       )
       .then((resposta) => {
         setBeloHorizonte(resposta.data.results);
