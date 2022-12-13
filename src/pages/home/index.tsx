@@ -133,79 +133,90 @@ export default function Home({
     createData(`${tempBeloHorizonte}º`, nomeBeloHorizonte, climaBeloHorizonte),
   ];
 
-  // useEffect(() => {
-  //   // obter restaurantes
-  //   http
-  //     .get("Brasilia,DF")
-  //     .then((resposta) => {
-  //       setBrasilia(resposta.data.results);
-  //       console.log(brasilia);
-  //     })
-  //     .catch((erro) => {
-  //       console.log(erro);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // obter restaurantes
+    http
+      .get(
+        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+      )
+      .then((resposta) => {
+        setBrasilia(resposta.data.results);
+        console.log(brasilia);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   // obter restaurantes
-  //   http
-  //     .get("Sao Paulo,SP")
-  //     .then((resposta) => {
-  //       setSaopaulo(resposta.data.results);
-  //       console.log(saopaulo);
-  //     })
-  //     .catch((erro) => {
-  //       console.log(erro);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // obter restaurantes
+    http
+      .get(
+        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+      )
+      .then((resposta) => {
+        setSaopaulo(resposta.data.results);
+        console.log(saopaulo);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   // obter restaurantes
-  //   http
-  //     .get("Rio de Janeiro,RJ")
-  //     .then((resposta) => {
-  //       setRio(resposta.data.results);
-  //       console.log(rio);
-  //     })
-  //     .catch((erro) => {
-  //       console.log(erro);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // obter restaurantes
+    http
+      .get(
+        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+      )
+      .then((resposta) => {
+        setRio(resposta.data.results);
+        console.log(rio);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   // obter restaurantes
-  //   http
-  //     .get("Salvador,BA")
-  //     .then((resposta) => {
-  //       setSalvador(resposta.data.results);
-  //       console.log(salvador);
-  //     })
-  //     .catch((erro) => {
-  //       console.log(erro);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // obter restaurantes
+    http
+      .get(
+        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+      )
+      .then((resposta) => {
+        setSalvador(resposta.data.results);
+        console.log(salvador);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   // obter restaurantes
-  //   http
-  //     .get("Belo Horizonte,MG")
-  //     .then((resposta) => {
-  //       setBeloHorizonte(resposta.data.results);
-  //       console.log(beloHorizonte);
-  //     })
-  //     .catch((erro) => {
-  //       console.log(erro);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // obter restaurantes
+    http
+      .get(
+        `https://api.hgbrasil.com/weather?format=json-cors&key=65c54c91&city_name=${inputCidade},${inputEstado}`
+      )
+      .then((resposta) => {
+        setBeloHorizonte(resposta.data.results);
+        console.log(beloHorizonte);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setCidade(e.target.value);
   };
-  
+
   const handleClick = () => {
     setIsShown(true);
   };
-
 
   return (
     <>
