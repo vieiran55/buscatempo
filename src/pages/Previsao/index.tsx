@@ -1,13 +1,9 @@
 import { memo, useEffect, useState } from "react";
 import http from "../../http";
-import IClima from "interfaces/IClima";
-import IDados from "interfaces/IDadosSemana";
-import Item from "components/Itens";
 import IDadosSemana from "interfaces/IDadosSemana";
 import Itens from "components/Itens";
 import estilos from "./Previsao.module.scss";
 import { CgClose } from "react-icons/cg";
-import { IconContext } from "react-icons";
 
 interface Opcoes {
   city: string;
@@ -54,11 +50,9 @@ function Previsao(props: Props) {
     return item.toString();
   });
 
-  console.log(valoresString);
 
   const temp = valoresString[0];
   const clima = valoresString[4];
-  const sensacao = valoresString[5];
   const nomeCidade = valoresString[7];
   const humidade = valoresString[9];
   const vento = valoresString[12];
@@ -70,7 +64,6 @@ function Previsao(props: Props) {
       .then((resposta) => {
         setRepositorio(resposta.data.results);
         setCidades(resposta.data.results.forecast);
-        console.log(cidades);
       })
       .catch((erro) => {
         console.log(erro);
@@ -100,8 +93,6 @@ function Previsao(props: Props) {
   //       console.log(erro);
   //     });
   // }, []);
-
-  console.log(cidades);
   return (
     <>
       <div>

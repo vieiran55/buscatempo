@@ -10,8 +10,6 @@ export default function AppRouter() {
   const [inputEstado, setEstado] = useState("");
   const [isShown, setIsShown] = useState(false);
 
-  // console.log(`teste no routes cidade: ${inputCidade}, estado: ${setCidade}`);
-
   return (
     <main>
       <Router>

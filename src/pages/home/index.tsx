@@ -1,4 +1,3 @@
-import Itens from "components/Itens";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -36,6 +35,7 @@ interface Opcoes {
   temp: number;
   max: number;
   index: number;
+  7: string;
 }
 
 interface Props {
@@ -59,15 +59,20 @@ export default function Home({
   const [cidades, setCidades] = useState<IDadosSemana[]>([]);
 
   const valores = Object.values(repositorio);
-  const valoresString = valores.map(function (item, indice) {
-    return item.toString();
-  });
+  const valoresString = valuesString(valores);
+
+  function valuesString(evento: Opcoes[]) {
+    evento.map(function (item, indice) {
+      return item.toString();
+    });
+  }
 
   const [brasilia, setBrasilia] = useState<Opcoes[]>([]);
   const valoresBrasilia = Object.values(brasilia);
   const valoresBrasiliaString = valoresBrasilia.map(function (item, indice) {
     return item.toString();
   });
+
   const nomeBrasilia = valoresBrasiliaString[7];
   const tempBrasilia = valoresBrasiliaString[0];
   const climaBrasilia = valoresBrasiliaString[4];
@@ -125,6 +130,7 @@ export default function Home({
     return { temp, city, clima };
   }
 
+
   const rows = [
     createData(`${tempBrasilia}º`, nomeBrasilia, climaBrasilia),
     createData(`${tempSaopaulo}º`, nomeSaopaulo, climaSaopaulo),
@@ -141,7 +147,6 @@ export default function Home({
       )
       .then((resposta) => {
         setBrasilia(resposta.data.results);
-        console.log(brasilia);
       })
       .catch((erro) => {
         console.log(erro);
@@ -156,7 +161,6 @@ export default function Home({
       )
       .then((resposta) => {
         setSaopaulo(resposta.data.results);
-        console.log(saopaulo);
       })
       .catch((erro) => {
         console.log(erro);
@@ -171,7 +175,6 @@ export default function Home({
       )
       .then((resposta) => {
         setRio(resposta.data.results);
-        console.log(rio);
       })
       .catch((erro) => {
         console.log(erro);
@@ -186,7 +189,6 @@ export default function Home({
       )
       .then((resposta) => {
         setSalvador(resposta.data.results);
-        console.log(salvador);
       })
       .catch((erro) => {
         console.log(erro);
@@ -201,7 +203,6 @@ export default function Home({
       )
       .then((resposta) => {
         setBeloHorizonte(resposta.data.results);
-        console.log(beloHorizonte);
       })
       .catch((erro) => {
         console.log(erro);
@@ -214,8 +215,31 @@ export default function Home({
     setCidade(e.target.value);
   };
 
-  const handleClick = () => {
+  const [valida, setValida] = useState(false);
+
+  const limpaCidade = () => {
+    setCidade("");
+    setEstado("");
+  };
+
+  const recarrega1 = () => {
+    setIsShown(!true);
+  };
+  const recarrega2 = () => {
     setIsShown(true);
+  };
+
+  const handleClick = () => {
+    if (inputCidade === "" || inputEstado === "") {
+      setValida(true);
+      setIsShown(!true);
+    } else if (inputCidade !== "" || inputEstado !== "") {
+      setValida(false);
+      setIsShown(true);
+      setTimeout(recarrega1, 500);
+      setTimeout(recarrega2, 600);
+      setTimeout(limpaCidade, 2000);
+    }
   };
 
   return (
@@ -247,6 +271,7 @@ export default function Home({
             autoComplete="off"
           >
             <TextField
+              error={valida}
               className={estilos.pesquisa}
               id="standard-basic"
               label="Insira aqui o nome da cidade"
@@ -268,10 +293,11 @@ export default function Home({
             />
             <div className={estilos.estado}>
               <FormControl variant="filled" sx={{ m: 0, minWidth: 90 }}>
-                <InputLabel id="demo-simple-select-filled-label">
+                <InputLabel error={valida} className={estilos.estado} id="demo-simple-select-filled-label">
                   Estado
                 </InputLabel>
                 <Select
+                  error={valida}
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"
                   value={inputEstado}
@@ -327,6 +353,7 @@ export default function Home({
                   <TableCell align="center">Clima</TableCell>
                 </TableRow>
               </TableHead>
+
               <TableBody>
                 {rows.map((item, index) => (
                   <TableRow

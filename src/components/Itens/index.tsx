@@ -1,5 +1,4 @@
 import IDadosSemana from "interfaces/IDadosSemana";
-import IDados from "interfaces/IDadosSemana";
 import { memo } from "react";
 import estilos from "./Item.module.scss";
 

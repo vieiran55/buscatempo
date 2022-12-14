@@ -40,6 +40,7 @@
 .form{
   display: flex;
   background-color: #f0f0f0;
+
   @media (min-width: $mobile) {
     width: 23em;
   }
@@ -63,6 +64,7 @@
     width: 91px;
   }
 }
+
 .pesquisa{
   border-radius: 0px;
 }
